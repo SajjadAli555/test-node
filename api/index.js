@@ -18,18 +18,22 @@ app.use(
 );
 
 const httpServer = http.createServer(app);
-const startDatabase = async () => {
-  // let db = DB_URI;
-  try {
-    mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("Database Server is connected", process.env.MONGODB_URI);
-  } catch (error) {
-    console.log("There is some error connecting to database", error);
+const connectDatabase = async () => {
+  if (mongoose.connection.readyState === 0) {
+    try {
+      await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      console.log("Connected to MongoDB");
+    } catch (error) {
+      console.log("Database connection failed:", error);
+    }
   }
 };
+
+connectDatabase();
+
 const io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:3000",
@@ -53,8 +57,6 @@ io.on("connection", (socket) => {
     console.log("User Disconnected", socket.id);
   });
 });
-
-startDatabase();
 
 const router = require("./Router/router");
 app.use(router);

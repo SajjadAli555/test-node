@@ -31,27 +31,34 @@ const upload = multer({ storage: storage });
 router.get("/api/message", (req, res) => {
   res.json({ message: "This is a simple Node.js API!" });
 });
-router.post("/adminlogin", adminController.adminLogin);
+router.post("/api/adminlogin", adminController.adminLogin);
 router.post(
-  "/products",
+  "/api/products",
   upload.single("image"),
   productController.createProduct
 );
-router.get("/products", productController.getProducts);
-router.get("/products/:id", productController.getProductById);
-router.delete("/products/:id", adminController.deleteProductById);
-router.put("/products/:id", adminController.updateProductById);
+router.get("/api/products", productController.getProducts);
+router.get("/api/products/:id", productController.getProductById);
+router.delete("/api/products/:id", adminController.deleteProductById);
+router.put("/api/products/:id", adminController.updateProductById);
 //User Routes
-router.post("/register", upload.single("avatar"), userController.registerUser);
-router.get("/users", userController.getUsers);
-router.get("/users/:id", userController.getUserById);
-router.delete("/users/:id", userController.deleteUserById);
-router.put("/users/:id", userController.updateUserById);
-router.post("/signin", userController.signInUser);
-router.get("/user-data", validateToken, getUserData);
+router.post(
+  "/api/register",
+  upload.single("avatar"),
+  userController.registerUser
+);
+router.get("/api/users", userController.getUsers);
+router.get("/api/users/:id", userController.getUserById);
+router.delete("/api/users/:id", userController.deleteUserById);
+router.put("/api/users/:id", userController.updateUserById);
+router.post("/api/signin", userController.signInUser);
+router.get("/api/user-data", validateToken, getUserData);
 //Payment Routes
-router.post("/create-payment-intent", paymentController.createPaymentIntent);
-router.post("/create-payment", (req, res) => {
+router.post(
+  "/api/create-payment-intent",
+  paymentController.createPaymentIntent
+);
+router.post("/api/create-payment", (req, res) => {
   createPayPalPayment(req, res);
 });
 //order routes
