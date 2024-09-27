@@ -54,6 +54,7 @@ router.put("/api/users/:id", userController.updateUserById);
 router.post("/api/signin", userController.signInUser);
 router.get("/api/user-data", validateToken, getUserData);
 //Payment Routes
+
 router.post(
   "/api/create-payment-intent",
   paymentController.createPaymentIntent
@@ -61,7 +62,7 @@ router.post(
 router.post("/api/create-payment", (req, res) => {
   createPayPalPayment(req, res);
 });
-//order routes
+//order routes checkout
 router.post("/api/store-user-details", orderController.storeUserDetails);
 router.get("/api/get-orders", orderController.getOrders);
 router.get("/api/get-ordersname", orderController.getOrdersByName);
