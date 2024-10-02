@@ -31,6 +31,16 @@ const upload = multer({ storage: storage });
 router.get("/api/message", (req, res) => {
   res.json({ message: "This is a simple Node.js API!" });
 });
+router.get('/api/images/:filename', (req, res) => {
+  const filePath = path.join('/tmp', 'images', req.params.filename);
+
+  // Check if the file exists before serving
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).json({ error: 'File not found' });
+  }
+});
 router.post("/api/adminlogin", adminController.adminLogin);
 router.post(
   "/api/products",
