@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(
   cors({
-    origin: "https://e-com-ui-nine.vercel.app" || "http://localhost:3000", // Replace with your frontend origin
+    origin: "https://e-com-ui-nine.vercel.app" || "http://localhost:3000"||"https://wow-display.co.uk/"||"https://www.wow-display.co.uk/", // Replace with your frontend origin
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
