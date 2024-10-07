@@ -6,16 +6,14 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 const http = require("http");
 const app = express();
-app.use(cors({ origin: "*" }));
+// app.use(cors({ origin: "*" }))e;
 app.use(express.json());
 app.use(express.static("public"));
-app.use(
-  cors({
-    origin: "https://wowdisplay.co.uk/"||"https://e-com-ui-nine.vercel.app" || "http://localhost:3000"||"https://wow-display.co.uk/"||"https://www.wow-display.co.uk/"||"http://wowdisplay.co.uk"||"https://wowdisplay.co.uk/", // Replace with your frontend origin
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors({
+  origin: "*", // Allow all origins
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow all methods
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
 const httpServer = http.createServer(app);
 const connectDatabase = async () => {
