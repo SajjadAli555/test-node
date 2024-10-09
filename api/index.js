@@ -7,13 +7,17 @@ const { Server } = require("socket.io");
 const http = require("http");
 const app = express();
 // app.use(cors({ origin: "*" }))e;
+app.use(bodyParser.json({ limit: "100mb" }));
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-app.use(cors({
-  origin: "*", // Allow all origins
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow all methods
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow all methods
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 const httpServer = http.createServer(app);
 const connectDatabase = async () => {
