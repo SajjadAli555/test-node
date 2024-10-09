@@ -29,9 +29,8 @@ const createProduct = async (req, res) => {
       stockAvailability,
       featured,
       colors,
+      images,
     } = req.body;
-
-    const images = req.file ? req.file.filename : undefined; // Get the uploaded image filename
 
     const newProduct = new ProductModel({
       name,

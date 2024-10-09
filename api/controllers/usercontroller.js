@@ -19,8 +19,7 @@ const upload = multer({ storage: storage });
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, phone, password, cpassword } = req.body;
-    const avatar = req.file ? req.file.filename : undefined; // Get the uploaded image filename
+    const { name, email, phone, password, cpassword, avatar } = req.body;
 
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
