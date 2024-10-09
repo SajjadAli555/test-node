@@ -43,12 +43,6 @@ const productSchema = new mongoose.Schema({
   colors: {
     type: [String], // Array of color codes
     required: false,
-    validate: {
-      validator: function (array) {
-        return array.length > 0;
-      },
-      message: "At least one color code is required.",
-    },
   },
   featured: {
     type: Boolean,
