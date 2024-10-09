@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Define the color schema (optional if not needed elsewhere)
 const colorSchema = new mongoose.Schema({
@@ -37,17 +37,17 @@ const productSchema = new mongoose.Schema({
       validator: function (array) {
         return array.length > 0;
       },
-      message: 'At least one image URL is required.',
+      message: "At least one image URL is required.",
     },
   },
   colors: {
     type: [String], // Array of color codes
-    required: true,
+    required: false,
     validate: {
       validator: function (array) {
         return array.length > 0;
       },
-      message: 'At least one color code is required.',
+      message: "At least one color code is required.",
     },
   },
   featured: {
@@ -67,6 +67,6 @@ const productSchema = new mongoose.Schema({
 });
 
 // Create the Product model
-const ProductModel = mongoose.model('Product', productSchema);
+const ProductModel = mongoose.model("Product", productSchema);
 
 module.exports = ProductModel;
